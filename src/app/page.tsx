@@ -3,7 +3,6 @@ import { HydrateClient, trpc } from "@/trpc/server";
 
 const page = () => {
   const generateRandomNumber = () => Math.floor(Math.random() * 10);
-  const text = "noble";
   void trpc.getCounts.prefetch();
   return (
     <>
