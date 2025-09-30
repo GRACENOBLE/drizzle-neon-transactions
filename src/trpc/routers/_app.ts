@@ -1,16 +1,11 @@
 import { z } from "zod";
 import { baseProcedure, createTRPCRouter } from "../init";
+import { counts } from "@/db/schema";
 export const appRouter = createTRPCRouter({
-  hello: baseProcedure
-    .input(
-      z.object({
-        text: z.string(),
-      })
-    )
-    .query((opts) => {
-      return {
-        greeting: `hello ${opts.input.text}`,
-      };
+  getCounts: baseProcedure
+    .query(async ({ ctx, input }) => {
+      const { db } = ctx;
+      return await db.select().from(counts);
     }),
 });
 // export type definition of API

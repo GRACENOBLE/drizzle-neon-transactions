@@ -4,13 +4,13 @@ import { HydrateClient, trpc } from "@/trpc/server";
 const page = () => {
   const generateRandomNumber = () => Math.floor(Math.random() * 10);
   const text = "noble";
-  void trpc.hello.prefetch({ text });
+  void trpc.getCounts.prefetch();
   return (
     <>
       <section>{generateRandomNumber()}</section>
       <section>
         <HydrateClient>
-          <Entries text={text} />
+          <Entries  />
         </HydrateClient>
       </section>
     </>
