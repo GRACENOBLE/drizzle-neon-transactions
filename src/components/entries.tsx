@@ -2,10 +2,11 @@
 
 import { trpc } from "@/trpc/client";
 import { Button } from "./ui/button";
+import EntryCard from "./entry-card";
 
 const Entries = () => {
   const { data, isLoading, isError } = trpc.getCounts.useQuery();
-  const updateCount = trpc.updateCounts.useMutation();
+
   return (
     <div>
       {isLoading ? (
@@ -22,18 +23,7 @@ const Entries = () => {
                 <Button className=" opacity-0">Update count</Button>
               </div>
               {data.map(({ id, count1, count2 }) => (
-                <div key={id} className="flex items-center gap-6">
-                  <div className="border rounded-[6px] p-4 grid place-items-center grid-cols-3 w-96 bg-muted">
-                    <span>{count1}</span>
-                    <span>{count2}</span>
-                    <Button
-                      onClick={() => updateCount.mutate({ id })}
-                      className="hover:cursor-pointer"
-                    >
-                      {updateCount.isPending ? "Updating..." : "Update count"}
-                    </Button>
-                  </div>
-                </div>
+                <EntryCard id={id} count1={count1} count2={count2} />
               ))}
             </div>
           )}
