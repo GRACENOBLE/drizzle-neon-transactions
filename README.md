@@ -61,10 +61,12 @@ pnpm install
 
 ### 2. Environment Setup
 
-Create a `.env` file:
 
-```env
-DATABASE_URL=postgresql://user:password@neon-host/dbname
+Copy `.env.example` to `.env` and fill in your database credentials:
+
+```bash
+cp .env.example .env
+# Edit .env with your Neon/Postgres connection string
 ```
 
 ### 3. Database Setup
