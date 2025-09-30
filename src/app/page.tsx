@@ -1,20 +1,16 @@
-"use client";
 import Entries from "@/components/entries";
-import { Button } from "@/components/ui/button";
-import { fetchEntries, updateEntry } from "@/server";
-import { Suspense } from "react";
+import { HydrateClient, trpc } from "@/trpc/server";
 
 const page = () => {
   const generateRandomNumber = () => Math.floor(Math.random() * 10);
-  const handleUpdateEntry = () => {};
-  const entries = fetchEntries();
+  void trpc.hello.prefetch({ text: "noble" });
   return (
     <>
       <section>{generateRandomNumber()}</section>
       <section>
-        <Suspense fallback={<div>Loading...</div>}>
-          <Entries entries={entries} />
-        </Suspense>
+        <HydrateClient>
+          <Entries />
+        </HydrateClient>
       </section>
     </>
   );

@@ -1,23 +1,17 @@
-import { counts } from "@/db/schema";
-import { use } from "react";
+"use client";
 
-type Counts = typeof counts.$inferSelect;
+import { trpc } from "@/trpc/client";
 
-const Entries = ({ entries }: { entries: Promise<Counts[]> }) => {
-  const allEntries = use(entries);
+const Entries = () => {
+  const greeting = trpc.hello.useQuery({ text: "noble" });
   return (
     <div>
-      {allEntries.map(({ id, count1, count2 }) => (
-        <div className="flex gap-4" key={id}>
-          <div className="rounded-[6px] px-4 py-2 border border-muted max-w-96 grid grid-cols-2">
-            <p>Count 1: {count1}</p>
-            <p>Count 2: {count2}</p>
-          </div>
-          {/* <Button onClick={() => updateEntry(id)}>Update count</Button> */}
-        </div>
-      ))}
+      {!greeting.data ? (
+        <div>Loading...</div>
+      ) : (
+        <div>{greeting.data.greeting}</div>
+      )}
     </div>
   );
 };
-
 export default Entries;
