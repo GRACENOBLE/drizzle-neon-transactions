@@ -90,10 +90,10 @@ See `src/db/schema.ts` for the table definitions. Example:
 
 ```ts
 // counts table
-export const counts = pgTable('counts', {
-	id: uuid('id').primaryKey(),
-	count1: integer('count1').default(0),
-	count2: integer('count2').default(0),
+export const counts = pgTable("counts", {
+  id: uuid("id").primaryKey(),
+  count1: integer("count1").default(0),
+  count2: integer("count2").default(0),
 });
 ```
 
@@ -105,8 +105,14 @@ All counter updates are performed in a transaction for atomicity:
 
 ```ts
 await db.transaction(async (tx) => {
-	await tx.update(counts).set({ count1: sql`${counts.count1} + 1` }).where(eq(counts.id, input.id));
-	await tx.update(counts).set({ count2: sql`${counts.count2} + 1` }).where(eq(counts.id, input.id));
+  await tx
+    .update(counts)
+    .set({ count1: sql`${counts.count1} + 1` })
+    .where(eq(counts.id, input.id));
+  await tx
+    .update(counts)
+    .set({ count2: sql`${counts.count2} + 1` })
+    .where(eq(counts.id, input.id));
 });
 ```
 
