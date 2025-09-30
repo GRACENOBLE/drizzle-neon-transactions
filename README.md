@@ -61,7 +61,6 @@ pnpm install
 
 ### 2. Environment Setup
 
-
 Copy `.env.example` to `.env` and fill in your database credentials:
 
 ```bash
