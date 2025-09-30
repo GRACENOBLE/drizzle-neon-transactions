@@ -3,13 +3,15 @@
 import { trpc } from "@/trpc/client";
 
 const Entries = ({ text }: { text: string }) => {
-  const greeting = trpc.hello.useQuery({ text });
+  const { data, isLoading, isError } = trpc.hello.useQuery({ text });
   return (
     <div>
-      {!greeting.data ? (
-        <div>Loading...</div>
+      {isLoading ? (
+        "Loading..."
+      ) : isError ? (
+        <p>Error loading greeting</p>
       ) : (
-        <div>{greeting.data.greeting}</div>
+        <>{data && <div>{data.greeting}</div>}</>
       )}
     </div>
   );
