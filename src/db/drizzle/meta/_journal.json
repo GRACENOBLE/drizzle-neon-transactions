@@ -8,6 +8,27 @@
       "when": 1759169647166,
       "tag": "0000_shallow_justin_hammer",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1759171724274,
+      "tag": "0001_rare_riptide",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1759171790202,
+      "tag": "0002_square_boomer",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1759176158578,
+      "tag": "0003_confused_champions",
+      "breakpoints": true
     }
   ]
 }

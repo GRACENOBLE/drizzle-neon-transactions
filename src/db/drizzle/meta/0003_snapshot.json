@@ -1,0 +1,51 @@
+{
+  "id": "a7d0ed22-76b1-48af-ac41-147582c88571",
+  "prevId": "9af08bc8-2503-4194-9984-05e79e8822d7",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.counts": {
+      "name": "counts",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "count_1": {
+          "name": "count_1",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "count_2": {
+          "name": "count_2",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
