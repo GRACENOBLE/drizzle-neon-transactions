@@ -5,7 +5,11 @@ import { eq, sql } from "drizzle-orm";
 export const appRouter = createTRPCRouter({
   getCounts: publicProcedure.query(async ({ ctx }) => {
     const { db } = ctx;
-    return await db.select().from(counts);
+    return (await db.select().from(counts)).sort((a, b) => {
+      if (a.id < b.id) return -1;
+      if (a.count1 > b.count2) return 1;
+      return 0;
+    });
   }),
   updateCounts: publicProcedure
     .input(

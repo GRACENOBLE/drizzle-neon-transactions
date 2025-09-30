@@ -22,7 +22,7 @@ const Entries = () => {
                 <span>Count 2</span>
                 <Button className=" opacity-0">Update count</Button>
               </div>
-              {data.map(({ id, count1, count2 }) => (
+              {data.sort().map(({ id, count1, count2 }) => (
                 <EntryCard key={id} id={id} count1={count1} count2={count2} />
               ))}
             </div>
