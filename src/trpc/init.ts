@@ -10,7 +10,8 @@ export const createTRPCContext = cache(async () => {
 // since it's not very descriptive.
 // For instance, the use of a t variable
 // is common in i18n libraries.
-const t = initTRPC.create({
+export type Context = Awaited<ReturnType<typeof createTRPCContext>>;
+const t = initTRPC.context<Context>().create({
   /**
    * @see https://trpc.io/docs/server/data-transformers
    */
