@@ -5,6 +5,7 @@ import { Button } from "./ui/button";
 
 const Entries = () => {
   const { data, isLoading, isError } = trpc.getCounts.useQuery();
+  const updateCount = trpc.updateCounts.useMutation();
   return (
     <div>
       {isLoading ? (
@@ -25,8 +26,11 @@ const Entries = () => {
                   <div className="border rounded-[6px] p-4 grid place-items-center grid-cols-3 w-96 bg-muted">
                     <span>{count1}</span>
                     <span>{count2}</span>
-                    <Button className="hover:cursor-pointer">
-                      Update count
+                    <Button
+                      onClick={() => updateCount.mutate({ id })}
+                      className="hover:cursor-pointer"
+                    >
+                      {updateCount.isPending ? "Updating..." : "Update count"}
                     </Button>
                   </div>
                 </div>

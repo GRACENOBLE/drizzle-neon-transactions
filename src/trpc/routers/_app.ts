@@ -1,11 +1,28 @@
 import { z } from "zod";
-import { baseProcedure, createTRPCRouter } from "../init";
+import { publicProcedure, createTRPCRouter } from "../init";
 import { counts } from "@/db/schema";
+import { eq, sql } from "drizzle-orm";
 export const appRouter = createTRPCRouter({
-  getCounts: baseProcedure
-    .query(async ({ ctx, input }) => {
+  getCounts: publicProcedure.query(async ({ ctx }) => {
+    const { db } = ctx;
+    return await db.select().from(counts);
+  }),
+  updateCounts: publicProcedure
+    .input(
+      z.object({
+        id: z.string(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
       const { db } = ctx;
-      return await db.select().from(counts);
+      await db
+        .update(counts)
+        .set({ count1: sql`${counts.count1} + 1` })
+        .where(eq(counts.id, input.id));
+      await db
+        .update(counts)
+        .set({ count1: sql`${counts.count2} + 1` })
+        .where(eq(counts.id, input.id));
     }),
 });
 // export type definition of API

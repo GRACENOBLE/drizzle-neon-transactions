@@ -9,7 +9,7 @@ const page = () => {
       <section>{generateRandomNumber()}</section>
       <section>
         <HydrateClient>
-          <Entries  />
+          <Entries />
         </HydrateClient>
       </section>
     </>
