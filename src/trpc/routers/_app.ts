@@ -16,15 +16,21 @@ export const appRouter = createTRPCRouter({
     .mutation(async ({ ctx, input }) => {
       const { db } = ctx;
       console.log("updating for id: ", input.id);
-
-      await db
-        .update(counts)
-        .set({ count1: sql`${counts.count1} + 1` })
-        .where(eq(counts.id, input.id));
-      await db
-        .update(counts)
-        .set({ count2: sql`${counts.count2} + 1` })
-        .where(eq(counts.id, input.id));
+      try {
+        await db.transaction(async (tx) => {
+          await tx
+            .update(counts)
+            .set({ count1: sql`${counts.count1} + 1` })
+            .where(eq(counts.id, input.id));
+          await tx
+            .update(counts)
+            .set({ count2: sql`${counts.count2} + 1` })
+            .where(eq(counts.id, input.id));
+        });
+      } catch (error) {
+        console.error("Failed to update counts: ", error);
+        throw new Error("Failed to update counts");
+      }
     }),
 });
 // export type definition of API
