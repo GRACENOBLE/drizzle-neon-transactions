@@ -2,8 +2,8 @@
 
 import { trpc } from "@/trpc/client";
 
-const Entries = () => {
-  const greeting = trpc.hello.useQuery({ text: "noble" });
+const Entries = ({ text }: { text: string }) => {
+  const greeting = trpc.hello.useQuery({ text });
   return (
     <div>
       {!greeting.data ? (
